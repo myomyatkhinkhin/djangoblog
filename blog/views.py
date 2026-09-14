@@ -7,6 +7,6 @@ def home(request):
 def about(request):
     return render(request, 'blog/about.html',{'content':'Dandoblog teams.'})
 
-def content(request):
-    return render(request, 'blog/content.html', {'abc': 'Welcome to the Djangoblog content page!'
+def contact(request):
+    return render(request, 'blog/contact.html', {'abc': 'Welcome to the Djangoblog contact page!'
     })
