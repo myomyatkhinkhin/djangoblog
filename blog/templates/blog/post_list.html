@@ -19,6 +19,16 @@
     {% endfor %}
 </div>
 
+<hr>
+
+<h5>Categories</h5>
+
+<ul class="list-unstyled">
+    {% for category in categories %}
+        <li>{{ category.name }} ({{ category.posts.count }})</li>
+    {% endfor %}
+</ul>
+
 <nav>
     <ul class="pagination">
         {% if page_obj.has_previous %}
