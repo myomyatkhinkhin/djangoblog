@@ -5,7 +5,7 @@ from .models import Post, Category
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-
+from .forms import PostForm
 
 def post_list(request,):
     posts = Post.objects.filter(status="published").order_by("-created_at")
@@ -51,7 +51,7 @@ class PostDetailView(DetailView):
 
 class PostCreateView(CreateView):
     model=Post
-    fields = ["title","content","category","tags","status"]
+    form_class = PostForm
     template_name = "blog/post_form.html"
 
     def get_success_url(self):
@@ -60,7 +60,7 @@ class PostCreateView(CreateView):
 
 class PostUpdateView(UpdateView):
     model = Post
-    fields = ["title", "content", "category", "tags", "status"]
+    form_class = PostForm
     template_name = "blog/post_form.html"
 
     def get_success_url(self):
