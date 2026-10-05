@@ -2,6 +2,10 @@
 
 {% block title %}{{ post.title }}{% endblock %}
 
+{% if post.cover_image %}
+    <img src="{{ post.cover_image.url }}" class="img-fluid rounded mb-3" alt="{{ post.title }}">
+{% endif %}
+
 {% block content %}
 <h1>{{ post.title }}</h1>
 

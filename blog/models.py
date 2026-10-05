@@ -16,7 +16,7 @@ class Tag(models.Model):
 
 class Post(models.Model):
     STATUS_CHOICES = [ ('draft', "Draft"), ('published','Published')]
-
+    cover_image = models.ImageField(upload_to="post_covers/",blank=True,null=True)
 
     
     title = models.CharField(max_length=200)
