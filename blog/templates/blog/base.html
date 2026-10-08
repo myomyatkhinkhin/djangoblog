@@ -16,6 +16,23 @@
     <div class="container mt-4">
         {% block content %}{% endblock %}
     </div>
+
+    <nav class="navbar navbar-dark bg-dark px-3">
+  <a class="navbar-brand" href="{% url 'home' %}">DjangoBlog</a>
+  <div>
+    {% if request.user.is_authenticated %}
+      <a class="btn btn-outline-light btn-sm" href="{% url 'post_create' %}">New Post</a>
+      <span class="text-white ms-2">Hi, {{ request.user.username }}</span>
+      <form method="post" action="{% url 'logout' %}" class="d-inline">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-outline-light btn-sm">Logout</button>
+      </form>
+    {% else %}
+      <a class="btn btn-outline-light btn-sm" href="{% url 'login' %}">Login</a>
+      <a class="btn btn-outline-light btn-sm" href="{% url 'register' %}">Register</a>
+    {% endif %}
+  </div>
+</nav>
     
 </body>
 </html>
