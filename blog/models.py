@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.text import slugify
 from PIL import Image
+from django.conf import settings
 
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -46,6 +47,14 @@ class Post(models.Model):
     def __str__(self):
      return self.title
 
+class Post(models.Model):
+    # ...your existing fields (title, content, image, etc.)...
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="posts",
+    )
+    # ...rest of the class...
 
 
     

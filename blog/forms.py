@@ -62,9 +62,9 @@ class PostForm(forms.ModelForm):
 
         return image
 
-    class RegisterForm(UserCreationForm):
+class RegisterForm(UserCreationForm):
       email = forms.EmailField(required=True)
 
-    class Meta:
+      class Meta:
         model = User
         fields = ["username", "email", "password1", "password2"]

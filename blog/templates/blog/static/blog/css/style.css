@@ -6,3 +6,81 @@ body{
     font-weight: bold;
     letter-spacing: 0.5px;
 }
+
+.card-img-top {
+        width: 100% !important;
+        height: 300px !important;
+        object-fit: cover !important;
+    }
+
+    :root {
+  --bg: #f6f0ec;
+  --card: #fffaf7;
+  --ink: #4a3f3a;
+  --accent: #c9a6a0;      /* dusty rose */
+  --accent-dark: #a9827b;
+}
+
+body {
+  background: linear-gradient(160deg, #f6f0ec 0%, #efe4e6 50%, #e6ebef 100%);
+  background-attachment: fixed;
+  color: var(--ink);
+  font-family: 'Quicksand', sans-serif;
+}
+
+/* navbar */
+.navbar, .bg-dark {
+  background: rgba(255, 250, 247, 0.7) !important;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(201, 166, 160, 0.3);
+}
+.navbar-brand {
+  font-family: 'Playfair Display', serif;
+  color: var(--ink) !important;
+  letter-spacing: 1px;
+}
+.navbar .btn, .navbar a.btn {
+  color: var(--accent-dark);
+  border-color: var(--accent);
+  border-radius: 999px;
+}
+
+/* cards */
+.card {
+  background: var(--card);
+  border: none;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(120, 90, 80, 0.12);
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 32px rgba(120, 90, 80, 0.2);
+}
+.card img {
+  filter: saturate(0.9) brightness(1.03);
+  transition: transform .5s ease;
+}
+.card:hover img { transform: scale(1.04); }
+
+.card-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+}
+.card-text { opacity: .75; }
+
+/* buttons */
+.btn-primary {
+  background: var(--accent);
+  border: none;
+  border-radius: 999px;
+  padding: 6px 20px;
+}
+.btn-primary:hover { background: var(--accent-dark); }
+
+.nav-username {
+  color: #8a5a44;
+  font-weight: 600;
+  margin-right: 0.5rem;
+}
