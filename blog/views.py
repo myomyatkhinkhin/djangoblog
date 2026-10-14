@@ -10,7 +10,8 @@ from django.contrib.auth import login
 from django.views.generic.edit import CreateView
 from .forms import PostForm, RegisterForm
 from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
-
+from django.contrib import messages
+from django.db import models
 
 def post_list(request,):
     posts = Post.objects.filter(status="published").order_by("-created_at")
@@ -52,7 +53,12 @@ class PostDetailView(DetailView):
     context_object_name = "post"
 
     def get_queryset(self):
-        return Post.objects.filter(status="published")
+        post = Post.objects.filter (status="published")
+        if self.request.user.is_authenticated:
+            post =Post.objects.filter (
+               models.Q(status = "published") | models.Q(author=self.request.user)
+          )
+        return post    
 
 class PostCreateView(LoginRequiredMixin ,CreateView):
     model=Post
@@ -62,24 +68,24 @@ class PostCreateView(LoginRequiredMixin ,CreateView):
 
     def form_valid(self, form):
         form.instance.author = self.request.user
+        messages.success(self.request, "Post published successful!")
         return super().form_valid(form)
 
     def get_success_url(self):
         return reverse_lazy("post_detail", kwargs ={"slug":self.object.slug})    
 
 
-class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+class PostUpdateView(UserPassesTestMixin, UpdateView):
     model = Post
     form_class = PostForm
     template_name = "blog/post_form.html"
-    login_url = "login"
+    raise_exception = True
 
     def test_func(self):
         return self.get_object().author == self.request.user
 
     def get_success_url(self):
         return reverse_lazy("post_detail", kwargs={"slug": self.object.slug})
-
 
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Post
@@ -109,4 +115,7 @@ class MyPostsView(LoginRequiredMixin, ListView):
     login_url = "login"
 
     def get_queryset(self):
-        return Post.objects.filter(author=self.request.user).order_by("-created_at")    
+        return Post.objects.filter(author=self.request.user).order_by("-created_at") 
+
+def custom_403(request, exception = None):
+     return render(request, "blog/403.html", status=403)  
