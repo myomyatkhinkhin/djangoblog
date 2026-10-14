@@ -3,24 +3,15 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
+
 <div class="row">
-    {% for post in page_obj %}
-    <div class="col-md-4 mb-4">
-        <div class="card h-100">
-            {% if post.cover_image %}
-    <img src="{{ post.cover_image.url }}" class="card-img-top" alt="{{ post.title }}">
-    
-{% endif %} 
-            <div class="card-body">
-                <h5 class="card-title">{{ post.title }}</h5>
-                <p class="card-text">{{ post.content|truncatewords:20 }}</p>
-                <a href="{% url 'post_detail' post.slug %}" class="btn btn-primary">Read more</a>
-            </div>
-        </div>
+  {% for post in page_obj %}
+    {% include "blog/partials/_post_card.html" %}
+  {% empty %}
+    <div class="col-12">
+      <p class="text-center text-muted py-5">No posts yet — <a href="{% url 'post_create' %}">write the first one!</a></p>
     </div>
-    {% empty %}
-    <p>No posts yet.</p>
-    {% endfor %}
+  {% endfor %}
 </div>
 
 <hr>
