@@ -6,6 +6,7 @@
 
 {% if post.cover_image %}
     <img src="{{ post.cover_image.url }}" class="img-fluid rounded mb-3" alt="{{ post.title }}">
+    <p class="card-text">{{ post.content }}</p>
 {% endif %}
 
 {% if user.is_authenticated %}
