@@ -1,0 +1,307 @@
+/* =====================================================================
+   DjangoBlog – Nature theme
+   Replace: blog/templates/blog/static/blog/css/style.css
+   Change the variables in :root to restyle the whole site.
+   ===================================================================== */
+
+/* NOTE: @import must stay at the very top of the file, or fonts won't load */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Quicksand:wght@400;500;600;700&display=swap');
+
+/* ===== Palette ===== */
+:root {
+  --bg-1: #f3f6ee;          /* morning mist  */
+  --bg-2: #e6efdf;          /* new leaves    */
+  --bg-3: #dfeaea;          /* sky haze      */
+  --card: #fbfdf8;          /* cream card    */
+  --ink: #2f3e2f;           /* forest text   */
+  --muted: #6b7d62;         /* sage text     */
+
+  --accent: #7fa66a;        /* leaf green    */
+  --accent-dark: #5b8248;   /* moss          */
+  --accent-deep: #3b5a2e;   /* deep pine     */
+  --accent-soft: #e3eed9;   /* pale sprout   */
+
+  --honey: #e3b95f;         /* sunlight (highlights, main nav button) */
+  --honey-dark: #c9993a;
+  --earth: #b5654a;         /* clay, used for Delete */
+
+  --cream: #f6f3e7;         /* text on the green menu bar */
+  --shadow: 47, 62, 47;     /* rgb of shadow colour */
+}
+
+/* Autumn option: --accent:#d49a5c; --accent-dark:#b87a38; --accent-deep:#7a4a1e; --accent-soft:#f6e8d3; */
+/* Ocean option:  --accent:#6fa8b8; --accent-dark:#4b8497; --accent-deep:#2c5a6b; --accent-soft:#dcedf1; */
+
+/* ===== Base ===== */
+body {
+  background: linear-gradient(160deg, var(--bg-1) 0%, var(--bg-2) 50%, var(--bg-3) 100%);
+  background-attachment: fixed;
+  color: var(--ink);
+  font-family: 'Quicksand', sans-serif;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Playfair Display', serif;
+  color: var(--accent-deep);
+}
+
+a { color: var(--accent-dark); }
+a:hover { color: var(--accent-deep); }
+
+hr {
+  border-color: var(--accent);
+  opacity: .3;
+}
+
+.text-muted { color: var(--muted) !important; }
+
+/* =====================================================================
+   MENU BAR  (solid forest green, cream text)
+   ===================================================================== */
+.navbar.navbar-dark,
+.navbar.bg-dark {
+  background: linear-gradient(135deg, var(--accent-deep) 0%, var(--accent-dark) 100%) !important;
+  border-bottom: 3px solid var(--honey);
+  box-shadow: 0 4px 16px rgba(var(--shadow), 0.25);
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+
+  /* Bootstrap's own colour variables for the navbar */
+  --bs-navbar-color: var(--cream);
+  --bs-navbar-hover-color: #ffffff;
+  --bs-navbar-active-color: #ffffff;
+  --bs-navbar-brand-color: var(--cream);
+  --bs-navbar-brand-hover-color: #ffffff;
+}
+
+.navbar .navbar-brand {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+  color: var(--cream) !important;
+}
+.navbar .navbar-brand:hover { color: #fff !important; }
+
+/* links */
+.navbar .nav-link {
+  color: var(--cream) !important;
+  font-weight: 500;
+  border-radius: 999px;
+  padding: .45rem 1rem;
+  transition: background .2s ease, color .2s ease;
+}
+.navbar .nav-link:hover {
+  color: #fff !important;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* current page (base.html marks it with .fw-bold) */
+.navbar .nav-link.fw-bold {
+  color: #fff !important;
+  background: rgba(255, 255, 255, 0.18);
+  text-decoration: underline !important;
+  text-decoration-color: var(--honey) !important;
+  text-decoration-thickness: 2px !important;
+  text-underline-offset: 6px;
+}
+
+/* "Hi, username" */
+.navbar .navbar-text {
+  color: var(--honey) !important;
+  font-weight: 700;
+}
+
+/* buttons in the menu bar */
+.navbar .btn {
+  border-radius: 999px;
+  font-weight: 600;
+  color: var(--cream);
+  border: 1.5px solid var(--cream);
+  background: transparent;
+}
+.navbar .btn:hover {
+  background: var(--cream);
+  border-color: var(--cream);
+  color: var(--accent-deep);
+}
+/* main action (New Post / Login) in honey yellow */
+.navbar .navbar-nav > a.btn:first-child {
+  background: var(--honey);
+  border-color: var(--honey);
+  color: var(--accent-deep);
+}
+.navbar .navbar-nav > a.btn:first-child:hover {
+  background: var(--honey-dark);
+  border-color: var(--honey-dark);
+  color: #fff;
+}
+
+/* hamburger button (small screens) */
+.navbar .navbar-toggler {
+  border: 1.5px solid var(--cream);
+  border-radius: 12px;
+}
+.navbar .navbar-toggler:focus { box-shadow: 0 0 0 .2rem rgba(246, 243, 231, .35); }
+.navbar .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23f6f3e7' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2.5' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+  filter: none;
+}
+
+/* opened menu on small screens */
+@media (max-width: 991.98px) {
+  .navbar .navbar-collapse {
+    margin-top: .75rem;
+    padding: .75rem 0 .25rem;
+    border-top: 1px solid rgba(246, 243, 231, .25);
+  }
+  .navbar .navbar-nav { gap: .15rem; }
+  .navbar .navbar-nav .btn,
+  .navbar .navbar-nav .navbar-text { margin: .25rem 0; }
+}
+
+/* =====================================================================
+   CARDS
+   ===================================================================== */
+.card {
+  background: var(--card);
+  border: none;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(var(--shadow), 0.12);
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 32px rgba(var(--shadow), 0.22);
+}
+.card-img-top {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  filter: saturate(0.95) brightness(1.03);
+  transition: transform .5s ease;
+}
+.card:hover .card-img-top { transform: scale(1.04); }
+
+/* "No Image" placeholder */
+.card .bg-secondary {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%) !important;
+  font-family: 'Playfair Display', serif;
+  letter-spacing: 1px;
+}
+
+.card-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  color: var(--accent-deep);
+}
+.card-text { opacity: .85; }
+
+/* =====================================================================
+   BUTTONS
+   ===================================================================== */
+.btn { border-radius: 999px; font-weight: 600; }
+
+.btn-primary,
+.btn-success {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  padding: 6px 20px;
+}
+.btn-primary:hover, .btn-primary:focus,
+.btn-success:hover, .btn-success:focus {
+  background: var(--accent-dark);
+  border-color: var(--accent-dark);
+  color: #fff;
+}
+
+.btn-outline-secondary {
+  color: var(--accent-dark);
+  border-color: var(--accent);
+}
+.btn-outline-secondary:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.btn-outline-danger {
+  color: var(--earth);
+  border-color: var(--earth);
+}
+.btn-outline-danger:hover {
+  background: var(--earth);
+  border-color: var(--earth);
+  color: #fff;
+}
+
+/* =====================================================================
+   FORMS (login, register, new / edit post)
+   ===================================================================== */
+form label {
+  display: block;
+  font-weight: 600;
+  color: var(--accent-deep);
+  margin-bottom: .25rem;
+}
+
+form input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="submit"]):not([type="hidden"]),
+form textarea,
+form select {
+  width: 100%;
+  background: var(--card);
+  color: var(--ink);
+  border: 1.5px solid rgba(127, 166, 106, 0.5);
+  border-radius: 12px;
+  padding: .55rem .9rem;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+form input:focus,
+form textarea:focus,
+form select:focus {
+  outline: none;
+  border-color: var(--accent-dark);
+  box-shadow: 0 0 0 .25rem rgba(127, 166, 106, 0.25);
+}
+
+.helptext, form .form-text { color: var(--muted); font-size: .85rem; }
+
+/* =====================================================================
+   PAGINATION
+   ===================================================================== */
+.page-link {
+  color: var(--accent-dark);
+  background: var(--card);
+  border-color: rgba(127, 166, 106, 0.35);
+  border-radius: 999px !important;
+  margin: 0 3px;
+}
+.page-link:hover {
+  background: var(--accent-soft);
+  color: var(--accent-deep);
+}
+.page-item.disabled .page-link {
+  color: var(--ink);
+  background: transparent;
+  border-color: transparent;
+}
+
+/* =====================================================================
+   ALERTS
+   ===================================================================== */
+.alert { border-radius: 14px; border: none; }
+.alert-success { background: var(--accent-soft); color: var(--accent-deep); }
+.alert-info    { background: #dcedf1; color: #2c5a6b; }
+.alert-warning { background: #f8ecc9; color: #7a5a14; }
+.alert-danger,
+.alert-error   { background: #f4dcd3; color: #8a3e27; }
+
+/* ===== Misc ===== */
+img.rounded, .img-fluid.rounded {
+  border-radius: 18px !important;
+  box-shadow: 0 8px 24px rgba(var(--shadow), 0.15);
+}
